@@ -18,8 +18,14 @@ public class TestCalculation {
 	}
 
 	public void emptyString() {
-		// Equals Empty String with 0
+		// equals Empty String with 0
 		assertEquals(calculator.Add(""), 0);
+	}
+	
+	public void stringContainsOnlySpace() {
+		// If String contains only Space then it was treated as an Empty String
+		// equals Space Contains String with 0
+		assertEquals(calculator.Add("\n"), 0);
 	}
 	
 }
