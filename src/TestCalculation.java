@@ -46,4 +46,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("1,2"), 3);
 	}
 	
+	public void stringContainsTwoValueCommaDelimitedWithLeadTrailSpace() {
+		// If String contains two comma delimited value having leading and trailing space then it was return sum of that two values
+		// equals Two Values having leading and trailing space contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("   1,2   "), 3);
+	}
+	
 }

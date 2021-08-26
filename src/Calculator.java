@@ -22,6 +22,10 @@ public class Calculator {
 	}
 	
 	private int getSum(String strNum1, String strNum2) {
+		// Remove leading and trailing spaces
+		strNum1 = strNum1.trim();
+		strNum2 = strNum2.trim();
+		
 		// return sum of passed Two String Values
 		return Integer.parseInt(strNum1) + Integer.parseInt(strNum2);
 	}
