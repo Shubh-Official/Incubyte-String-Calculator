@@ -28,4 +28,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("\n"), 0);
 	}
 	
+	public void stringContainsOneValue() {
+		// If String contains only one value then it was return that same value
+		// equals One Value contains String with that Same Integer Value
+		assertEquals(calculator.Add("1"), 1);
+	}
+	
 }
