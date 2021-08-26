@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
+import static org.testng.Assert.assertEquals;
 
 
 
@@ -16,4 +17,9 @@ public class TestCalculation {
 		calculator = new Calculator();
 	}
 
+	public void emptyString() {
+		// Equals Empty String with 0
+		assertEquals(calculator.Add(""), 0);
+	}
+	
 }
