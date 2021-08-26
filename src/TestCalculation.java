@@ -34,4 +34,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("1"), 1);
 	}
 	
+	public void stringContainsOneValueWithSpace() {
+		// If String contains only one value having leading and trailing space then it was also return that same value
+		// equals One Value having leading and trailing space contains String with that Same Integer Value
+		assertEquals(calculator.Add("   1   "), 1);
+	}
+	
 }
