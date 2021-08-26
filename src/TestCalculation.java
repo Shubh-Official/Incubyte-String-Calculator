@@ -40,4 +40,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("   1   "), 1);
 	}
 	
+	public void stringContainsTwoValueCommaDelimited() {
+		// If String contains two comma delimited value then it was return sum of that two values
+		// equals Two Values contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("1,2"), 3);
+	}
+	
 }
