@@ -70,4 +70,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("1,2,3"), 6);
 	}
 	
+	public void stringContainsThreeValueCommaDelimitedWithLeadTrailSpace() {
+		// If String contains three comma delimited value having leading and trailing space then it was return sum of that three values
+		// equals Three Values having leading and trailing space contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("   1,2,3   "), 6);
+	}
+	
 }
