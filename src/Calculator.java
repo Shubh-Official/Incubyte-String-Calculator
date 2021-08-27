@@ -3,9 +3,11 @@ public class Calculator {
 	// Define delimiters as final so we can not change delimiters value
 	private final String delimiters = ",|\n";
 	// Define dynamicDelimiters variable to maintain Dynamic Delimiters
-	private String dynamicDelimiters = "";
+	// private String dynamicDelimiters = "";
 	// Define string before dynamicDelimiters
 	private final String stringBeforeDynamicDelimiter = "//";
+	// String array of escapeRegEx in which we need to add extra Backward Slash (\) before the Escape Character
+	private String[] escapeRegEx = {"+", "-", "*", "/", "$", "%", "^", ".", "?", "|", ")", ")", "{", "}", "[", "]"};
 	
 	public int Add(String numbers) {
 		// Remove leading and trailing spaces
@@ -18,17 +20,56 @@ public class Calculator {
 		// String number Array reference Defined
 		String[] number;
 		
-		if(numbers.matches("(//).(\n).*")) {
+		if(numbers.matches("(//).*(\n).*")) {
 			// Find index of New Line
 			int newLineIndex = numbers.indexOf("\n");
 			// Find index of string before dynamicDelimiters
 			int delimiterIndex = numbers.indexOf(stringBeforeDynamicDelimiter) + stringBeforeDynamicDelimiter.length();
 			// Find dynamicDelimiter from Original String
-			dynamicDelimiters = numbers.substring(delimiterIndex, delimiterIndex+1);
-			// Separates numbers String from Original String 
+			String dynamicDelimiterString = numbers.substring(delimiterIndex, newLineIndex);
+			// Split dynamicDelimiterString with Open Square Bracket([) and close Square Bracket(])
+			String[] dynamicDelimiters = dynamicDelimiterString.split("\\[|\\]");
+			// Define regEx to split numbers String
+			String regEx = "";
+			// Iterates over all separated delimiters 
+			for(String dynamicDelimiter: dynamicDelimiters) {
+				if(dynamicDelimiter.isEmpty());
+				else {
+					// Iterates over all the character of current dynamicDelimiter
+					for(int charIndex = 0; charIndex < dynamicDelimiter.length(); charIndex++) {
+						// Boolean variable that indicate that we need to add Backward Slash (\) before current character or not 
+						boolean inEscapeRegEx = false;
+						// Finding Current Character of Current dynamicDelimiter
+						String currentDynamicDelimiterChar = dynamicDelimiter.substring(charIndex, charIndex+1);
+						// for-each that check currentDynamicDelimiterChar is from escapeRegEx or not
+						for(String charEscapeRegEx: escapeRegEx) {
+							// If currentDynamicDelimiterChar is from escapeRegEx then make inEscapeRegEx is True and Break the Loop
+                            if(charEscapeRegEx.equals(currentDynamicDelimiterChar)) {
+                            	// Changing boolean value of inEscapeRegEx as true
+                            	inEscapeRegEx = true;
+                            	// Break the Loop
+                                break;
+                            }
+                        }
+						// If Current Character of Current dynamicDelimiter is from escapeRegEx then add One Backward Slash (\) to regEx
+						if(inEscapeRegEx)
+                            regEx += "\\";
+						// Add Current Character of Current dynamicDelimiter to regEx
+                        regEx += currentDynamicDelimiterChar;
+					}
+					// Add Space for to separate with another dynamicDelimiter
+					regEx += " ";
+				}
+			}
+			// One Extra Space was added at the end of the regEx based on our logic
+			// Remove Leading and Trailing Spaces
+			regEx = regEx.trim();
+			// Now Replace all Spaces with Piping Sign which define OR operation in regEx
+			regEx = regEx.replaceAll(" ", "|");
+			// Find numbers String from the Original Passed String with Dynamic Delimiter
 			numbers = numbers.substring(newLineIndex+1);
-			// Split separated number String with dynamicDelimiters 
-			number = numbers.split(dynamicDelimiters);
+			// Split numbers String by passing the regEx which we founded
+			number = numbers.split(regEx);
 		}
 		else {
 			// Split number String with default delimiters

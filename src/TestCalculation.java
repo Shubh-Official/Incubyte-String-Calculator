@@ -172,19 +172,19 @@ public class TestCalculation {
 		assertEquals(calculator.Add("1\n,,\n\n\n,2"), -1);
 	}
 	
-	public void stringWithOneDynamicDelimiterSemicolonAndTwoValue() {
+	public void stringWithOneCharOneDynamicDelimiterSemicolonAndTwoValue() {
 		// String contains Dynamic Delimiter up to One character and Numbers
 		// equals Two Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
 		assertEquals(calculator.Add("//;\n1;2"), 3);
 	}
 	
-	public void stringWithOneDynamicDelimiterHashTagAndFourValue() {
+	public void stringWithOneCharOneDynamicDelimiterHashTagAndFourValue() {
 		// String contains Dynamic Delimiter up to One character and Numbers
 		// equals Four Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
 		assertEquals(calculator.Add("//#\n1#2#3#4"), 10);
 	}
 	
-	public void stringWithOneDynamicDelimiterHashTagAndNumberHaveConsecutiveDynamicDelimiters() {
+	public void stringWithOneCharOneDynamicDelimiterHashTagAndNumberHaveConsecutiveDynamicDelimiters() {
 		// String contains Dynamic Delimiter up to One character and Numbers
 		// equals Four Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
 		assertEquals(calculator.Add("//#\n1##2###3####4"), -1);
@@ -296,6 +296,94 @@ public class TestCalculation {
 		// String contains Dynamic Delimiter and some of the values are more than 1000
 		// equals with all numbers less than or equal to 1000 with its sum value 10
 		assertEquals(calculator.Add("//%\n1010%4%3%9999%2%1%1234"), 10);
+	}
+	
+	public void stringWithMultiCharOneDynamicDelimiter3AstricAndFourValue() {
+		// String contains Dynamic Delimiter as Multi-Character
+		// equals with all dynamic delimiter separated number with its sum
+		assertEquals(calculator.Add("//[***]\n1***2***3***4"), 10);
+	}
+	
+	public void stringWithMultiCharOneDynamicDelimiter2Dollar2ColonAndFourValueOneMoreThan1000() {
+		// String contains Dynamic Delimiter as Multi-Character and some values are more than 100
+		// equals with all dynamic delimiter separated number with its sum but for sum we ignore number whose value is greater than 1000
+		assertEquals(calculator.Add("//[$<.*>]\n1$<.*>1002$<.*>3$<.*>6"), 10);
+	}
+	
+	public void stringWithMultiCharOneDynamicDelimiterLessThanAstricGreaterThanConsecutiveAndThreeValue() {
+		// String contains Dynamic Delimiter as Multi-Character and Dynamic Delimiter Consecutive Repeated More than One
+		// equals with all dynamic delimiter consecutively repeated with -1
+		assertEquals(calculator.Add("//[<*>]\n1<*>2<*><*>3"), -1);
+	}
+	
+	public void stringWithMultiCharOneDynamicDelimiterPlusMinusMinusPlusAndFourValueTwoNegative() throws Exception {
+		try {
+			// If negative numbers are there then it will throw an exception with that negative values
+			calculator.Add("//[+--+]\n1100+--+-1200+--+-50+--+1300");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -1200 -50");
+		}
+	}
+
+	
+	public void stringWithOneCharMultiDynamicDelimiterAstricPercentageAndThreeValue() {
+		// String contains Multiple One Character Dynamic Delimiter
+		// equals with all dynamic delimiter separated number with its sum
+		assertEquals(calculator.Add("//[*][%]\n1*2%3"), 6);
+	}
+	
+	public void stringWithOneCharMultiDynamicDelimiterAstricLessThanQuestionAndSixValueTwoMoreThan1000() {
+		// String contains Multiple One Character Dynamic Delimiter some values are more than 100
+		// equals with all dynamic delimiter separated number with its sum but for sum we ignore number whose value is greater than 1000
+		assertEquals(calculator.Add("//[*][<][?]\n1*2<3?1234?5678*4"), 10);
+	}
+	
+	public void stringWithOneCharMultiDynamicDelimiterColonPipiConsecutiveAndFourValue() {
+		// String contains Multiple One Character Dynamic Delimiter and Dynamic Delimiter Consecutive Repeated More than One
+		// equals with all dynamic delimiter consecutively repeated with -1
+		assertEquals(calculator.Add("//[:][|]\n1:2|3|:4"), -1);
+	}
+	
+	public void stringWithOneCharMultiDynamicDelimiterHashDotAndFourValueTwoNegative() throws Exception {
+		try {
+			// If negative numbers are there then it will throw an exception with that negative values
+			calculator.Add("//[#][.]\n1100#-1200.-50.1300");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -1200 -50");
+		}
+	}
+	
+	public void stringWithMultiCharMultiDynamicDelimiter3Astric3PlusAndFourValue() {
+		// String contains Multiple Multi-Character Dynamic Delimiter
+		// equals with all dynamic delimiter separated number with its sum
+		assertEquals(calculator.Add("//[***][+++]\n1***2***3+++4"), 10);
+	}
+	
+	public void stringWithMultiCharMultiDynamicDelimiter1Hash1Dollar1Colon1Semicolon1Dot1CaretAndSixValueTwoMoreThan1000() {
+		// String contains Multiple Multi-Character Dynamic Delimiter some values are more than 100
+		// equals with all dynamic delimiter separated number with its sum but for sum we ignore number whose value is greater than 1000
+		assertEquals(calculator.Add("//[#$][:;.^]\n1#$2:;.^3:;.^1234:;.^5678#$4"), 10);
+	}
+	
+	public void stringWithMultiCharMultiDynamicDelimiterPipe2Attherate3ExclamationConsecutiveAndFourValue() {
+		// String contains Multiple Multi-Character Dynamic Delimiter and Dynamic Delimiter Consecutive Repeated More than One
+		// equals with all dynamic delimiter consecutively repeated with -1
+		assertEquals(calculator.Add("//[|@@][!!!]\n1|@@2!!!3!!!|@@4"), -1);
+	}
+	
+	public void stringWithMultiCharMultiDynamicDelimiterCaretAstricCaretLessthanGreaterThanAndFourValueTwoNegative() throws Exception {
+		try {
+			// If negative numbers are there then it will throw an exception with that negative values
+			calculator.Add("//[^*^][<>]\n1100^*^-1200^*^-50<>1300");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -1200 -50");
+		}
 	}
 	
 }
