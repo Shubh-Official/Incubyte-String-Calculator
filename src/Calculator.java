@@ -39,7 +39,10 @@ public class Calculator {
 		if(number.length == 1) {
 			if( str2num(number[0]) < 0 )
 				throw new IllegalArgumentException("negatives not allowed: " + str2num(number[0]));
-			return str2num(number[0]);
+			else if( str2num(number[0]) <= 1000)
+				return str2num(number[0]);
+			else
+				return 0;
 		}
 		// If more than one number are there then return sum of those all numbers as Integer
 		else
@@ -61,8 +64,10 @@ public class Calculator {
 			}
 			
 			if( str2num(num) >= 0 ) {
-				// Add num to sumNumber variable
-				sumNumber += str2num(num);
+				if( str2num(num) <= 1000 ) {
+					// Add num to sumNumber variable
+					sumNumber += str2num(num);
+				}
 			}
 			else {
 				// Adding negative number into negativeNumbers String

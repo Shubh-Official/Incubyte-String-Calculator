@@ -263,4 +263,39 @@ public class TestCalculation {
 		assertEquals(calculator.Add("//#\n10#-12###-100##-2#5##-1"), -1);
 	}
 	
+	public void oneNumberMoreThan1000CommaDelimited() {
+		// String contains one Number having more than 1000 value so ignore them
+		// equals with all numbers less than or equal to 1000 with its sum value
+		assertEquals(calculator.Add("1234"), 0);
+	}
+	
+	public void oneNumberMoreThan1000FromAllNumberCommaDelimited() {
+		// String contains one Number having more than 1000 value so ignore them
+		// equals with all numbers less than or equal to 1000 with its sum value
+		assertEquals(calculator.Add("1,1001,2"), 3);
+	}
+	
+	public void allThreeNumberMoreThan1000NewLineDelimited() {
+		// String contains all the Number having more than 1000 value so ignore them
+		// equals with 0 because all number having value grater than 1000 so ignored all the values 
+		assertEquals(calculator.Add("1100\n1200\n1300"), 0);
+	}
+	
+	public void twoNumberMoreThan1000WithNegativeNumberNewLineOrCommaDelimited() throws Exception {
+		try {
+			// If negative numbers are there then it will throw an exception with that negative values
+			calculator.Add("1100\n-1200\n-50,1300");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -1200 -50");
+		}
+	}
+	
+	public void someNumbersMoreThan1000WithDynamicDelimiter() {
+		// String contains Dynamic Delimiter and some of the values are more than 1000
+		// equals with all numbers less than or equal to 1000 with its sum value 10
+		assertEquals(calculator.Add("//%\n1010%4%3%9999%2%1%1234"), 10);
+	}
+	
 }
