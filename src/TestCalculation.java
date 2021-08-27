@@ -172,4 +172,22 @@ public class TestCalculation {
 		assertEquals(calculator.Add("1\n,,\n\n\n,2"), -1);
 	}
 	
+	public void stringWithOneDynamicDelimiterSemicolonAndTwoValue() {
+		// String contains Dynamic Delimiter up to One character and Numbers
+		// equals Two Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
+		assertEquals(calculator.Add("//;\n1;2"), 3);
+	}
+	
+	public void stringWithOneDynamicDelimiterHashTagAndFourValue() {
+		// String contains Dynamic Delimiter up to One character and Numbers
+		// equals Four Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
+		assertEquals(calculator.Add("//#\n1#2#3#4"), 10);
+	}
+	
+	public void stringWithOneDynamicDelimiterHashTagAndNumberHaveConsecutiveDynamicDelimiters() {
+		// String contains Dynamic Delimiter up to One character and Numbers
+		// equals Four Numbers separated by Dynamic Delimiters with Sum of those Separated Numbers
+		assertEquals(calculator.Add("//#\n1##2###3####4"), -1);
+	}
+	
 }

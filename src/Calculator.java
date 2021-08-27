@@ -2,6 +2,10 @@ public class Calculator {
 	
 	// Define delimiters as final so we can not change delimiters value
 	private final String delimiters = ",|\n";
+	// Define dynamicDelimiters variable to maintain Dynamic Delimiters
+	private String dynamicDelimiters = "";
+	// Define string before dynamicDelimiters
+	private final String stringBeforeDynamicDelimiter = "//";
 	
 	public int Add(String numbers) {
 		// Remove leading and trailing spaces
@@ -10,9 +14,26 @@ public class Calculator {
 		// If number String is Empty then return 0
 		if(numbers.isEmpty())
 			return 0;
-		  
-		// Split String with predefined delimiter
-		String[] number = numbers.split(delimiters);
+		
+		// String number Array reference Defined
+		String[] number;
+		
+		if(numbers.matches("(//).(\n).*")) {
+			// Find index of New Line
+			int newLineIndex = numbers.indexOf("\n");
+			// Find index of string before dynamicDelimiters
+			int delimiterIndex = numbers.indexOf(stringBeforeDynamicDelimiter) + stringBeforeDynamicDelimiter.length();
+			// Find dynamicDelimiter from Original String
+			dynamicDelimiters = numbers.substring(delimiterIndex, delimiterIndex+1);
+			// Separates numbers String from Original String 
+			numbers = numbers.substring(newLineIndex+1);
+			// Split separated number String with dynamicDelimiters 
+			number = numbers.split(dynamicDelimiters);
+		}
+		else {
+			// Split number String with default delimiters
+			number = numbers.split(delimiters);
+		}
 		
 		// If only one number is there then simply return that number as Integer
 		if(number.length == 1)
