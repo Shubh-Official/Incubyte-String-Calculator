@@ -15,19 +15,17 @@ public class Calculator {
 		if(number.length == 1)
 			return Integer.parseInt(number[0]);
 		// If two numbers are there then return sum of that two numbers as Integer
-		else if(number.length == 2)
-			return getSum(number[0], number[1]);
 		else
-			return -1;
+			return getSum(number);
 	}
 	
-	private int getSum(String strNum1, String strNum2) {
-		// Remove leading and trailing spaces
-		strNum1 = strNum1.trim();
-		strNum2 = strNum2.trim();
-		
-		// return sum of passed Two String Values
-		return Integer.parseInt(strNum1) + Integer.parseInt(strNum2);
+	private int getSum(String []number) {
+		int sumNumber = 0;
+		for(String num : number) {
+			num = num.trim();
+			sumNumber += Integer.parseInt(num);
+		}
+		return sumNumber;
 	}
 
 }
