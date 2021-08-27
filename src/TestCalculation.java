@@ -136,4 +136,22 @@ public class TestCalculation {
 		assertEquals(calculator.Add("   1  \n  2  ,  3   "), 6);
 	}
 	
+	public void stringContainsTwoConsecutiveCommaDelimiters() {
+		// If String contains Two Consecutive Comma Delimiter
+		// equals Invalid Input with -1
+		assertEquals(calculator.Add("1,,2"), -1);
+	}
+	
+	public void stringContainsTwoConsecutiveNewLineDelimiters() {
+		// If String contains Two Consecutive New Line Delimiter
+		// equals Invalid Input with -1
+		assertEquals(calculator.Add("1\n\n2"), -1);
+	}
+	
+	public void stringContainsTwoConsecutiveNewLineOrCommaDelimiters() {
+		// If String contains Two Consecutive New Line or Comma Delimiter
+		// equals Invalid Input with -1
+		assertEquals(calculator.Add("1\n,2"), -1);
+	}
+	
 }

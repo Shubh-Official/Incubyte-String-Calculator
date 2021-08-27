@@ -30,6 +30,11 @@ public class Calculator {
 			// Remove leading and trailing spaces
 			num = num.trim();
 			
+			// More than one consecutive delimiters exist then num is empty so return -1
+			if(num.isEmpty()) {
+				return -1;
+			}
+			
 			// Add num to sumNumber variable
 			sumNumber += Integer.parseInt(num);
 		}
