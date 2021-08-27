@@ -112,4 +112,28 @@ public class TestCalculation {
 		assertEquals(calculator.Add("   1  \n  2   "), 3);
 	}
 	
+	public void stringContainsThreeValueNewLineOrCommaDelimited() {
+		// If String contains three \n and comma delimited value having leading, trailing and in between space then it was return sum of that three values
+		// equals Three Values contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("1\n2,3"), 6);
+	}
+	
+	public void stringContainsThreeValueNewLineOrCommaDelimitedWithLeadTrailSpace() {
+		// If String contains three \n and comma delimited value having leading and trailing space then it was return sum of that three values
+		// equals Three Values having leading and trailing space contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("   1\n2,3   "), 6);
+	}
+	
+	public void stringContainsThreeValueNewLineOrCommaDelimitedWithSpaceInBetween() {
+		// If String contains three \n and comma delimited value having in between space then it was return sum of that three values
+		// equals Three Values having in between space contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("1  \n  2  ,  3"), 6);
+	}
+	
+	public void stringContainsThreeValueNewLineOrCommaDelimitedWithSpaceInBetweenAndLeadTrailSpace() {
+		// If String contains three \n and comma delimited value having leading, trailing and in between space then it was return sum of that three values
+		// equals Three Values having leading, trailing and in between space contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("   1  \n  2  ,  3   "), 6);
+	}
+	
 }
