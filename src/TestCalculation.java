@@ -76,4 +76,10 @@ public class TestCalculation {
 		assertEquals(calculator.Add("   1,2,3   "), 6);
 	}
 	
+	public void stringContainsThreeValueCommaDelimitedWithSpaceInBetween() {
+		// If String contains three comma delimited value having in between space then it was return sum of that three values
+		// equals Three Values having in between space contains String with that Integer Sum of those Three Values
+		assertEquals(calculator.Add("1  ,  2  ,  3"), 6);
+	}
+	
 }
