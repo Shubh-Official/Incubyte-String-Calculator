@@ -190,4 +190,77 @@ public class TestCalculation {
 		assertEquals(calculator.Add("//#\n1##2###3####4"), -1);
 	}
 	
+	public void negativeInputThrowExceptionOneValue() throws Exception {
+		try {
+			// String contains Single Negative Value
+			calculator.Add("-100");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -100");
+		}
+	}
+	
+	public void negativeInputThrowExceptionMoreThanOneCommaDelimitedValue() throws Exception {
+		try {
+			// String contains more than One Comma Delimited Negative Value
+			calculator.Add("10,5,4,0,-12,100,-2,-0,5");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -12 -2");
+		}
+	}
+	
+	public void negativeInputThrowExceptionMoreThanOneNewLineDelimitedValue() throws Exception {
+		try {
+			// String contains more than One New Line delimited Negative Value
+			calculator.Add("10\n-12\n-100\n-2\n5");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -12 -100 -2");
+		}
+	}
+	
+	public void negativeInputThrowExceptionMoreThanOneNewLineOrCommaDelimitedValue() throws Exception {
+		try {
+			// String contains more than One New Line or Comma delimited Negative Value
+			calculator.Add("10\n-12,-100\n-2\n5,-1");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -12 -100 -2 -1");
+		}
+	}
+	
+	public void negativeInputThrowExceptionMoreThanOneConsecutiveNewLineOrCommaDelimitedValue() {
+		// String contains more than One New Line delimited Negative Value
+		// equals with -1 because if num is empty then it will return -1
+		// Although Negative Numbers are there but Exception was not generated because Exception will throw at the end of the for-each loop iteration
+		// We need to store all the negative numbers so first we iterate for-each loop and store all the negative values
+		// But while iterating for-each loop of any empty string detected then program will simply return -1 from that point
+		assertEquals(calculator.Add("-10\n,,,\n-12,,,-100\n\n-2\n5,-1"), -1);
+	}
+	
+	public void negativeInputThrowExceptionWithDynamicDelimiter() throws Exception {
+		try {
+			// String contains Dynamic Delimiter more than One Negative Value
+			calculator.Add("//#\n10#-12#-100#-2#5#-1");
+		}
+		catch(IllegalArgumentException e) {
+			// equals with Error Message along with all Passed Negative Numbers
+			assertEquals(e.getMessage(), "negatives not allowed: -12 -100 -2 -1");
+		}
+	}
+	
+	public void negativeInputThrowExceptionWithConsecutiveDynamicDelimiter() {
+		// String contains Consecutive Dynamic Delimiter more than One Negative Value
+		// equals with -1 because if num is empty then it will return -1
+		// Although Negative Numbers are there but Exception was not generated because Exception will throw at the end of the for-each loop iteration
+		// We need to store all the negative numbers so first we iterate for-each loop and store all the negative values
+		// But while iterating for-each loop of any empty string detected then program will simply return -1 from that point
+		assertEquals(calculator.Add("//#\n10#-12###-100##-2#5##-1"), -1);
+	}
+	
 }

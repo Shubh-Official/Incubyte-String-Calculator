@@ -36,8 +36,11 @@ public class Calculator {
 		}
 		
 		// If only one number is there then simply return that number as Integer
-		if(number.length == 1)
-			return Integer.parseInt(number[0]);
+		if(number.length == 1) {
+			if( str2num(number[0]) < 0 )
+				throw new IllegalArgumentException("negatives not allowed: " + str2num(number[0]));
+			return str2num(number[0]);
+		}
 		// If more than one number are there then return sum of those all numbers as Integer
 		else
 			return getSum(number);
@@ -46,6 +49,7 @@ public class Calculator {
 	private int getSum(String []number) {
 		// sumNumber that contains sum of all number in String array
 		int sumNumber = 0;
+		String negativeNumbers = "";
 		// for-each loop that iterates all the values in String array of number
 		for(String num : number) {
 			// Remove leading and trailing spaces
@@ -56,10 +60,30 @@ public class Calculator {
 				return -1;
 			}
 			
-			// Add num to sumNumber variable
-			sumNumber += Integer.parseInt(num);
+			if( str2num(num) >= 0 ) {
+				// Add num to sumNumber variable
+				sumNumber += str2num(num);
+			}
+			else {
+				// Adding negative number into negativeNumbers String
+				negativeNumbers += ( num + " " );
+			}
 		}
+		
+		if(!negativeNumbers.isEmpty()) {
+			// Remove Leading and Trailing Space
+			// Last Space added in Negative Numbers so we need to remove this
+			negativeNumbers = negativeNumbers.trim();
+			throw new IllegalArgumentException("negatives not allowed: " + negativeNumbers);
+		}
+		
 		return sumNumber;
 	}
-
+	
+	private int str2num(String num) {
+		// Converting String to Integer
+		// Return Integer Value of passed String Number
+		return Integer.parseInt(num);
+	}
+	
 }
