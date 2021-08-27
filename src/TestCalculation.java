@@ -88,4 +88,28 @@ public class TestCalculation {
 		assertEquals(calculator.Add("   1  ,  2  ,  3   "), 6);
 	}
 	
+	public void stringContainsTwoValueNewLineDelimited() {
+		// If String contains two \n delimited value then it was return sum of that two values
+		// equals Two Values contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("1\n2"), 3);
+	}
+	
+	public void stringContainsTwoValueNewLineDelimitedWithLeadTrailSpace() {
+		// If String contains two \n delimited value having leading and trailing space then it was return sum of that two values
+		// equals Two Values having leading and trailing space contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("   1\n2   "), 3);
+	}
+	
+	public void stringContainsTwoValueNewLineDelimitedWithSpaceInBetween() {
+		// If String contains two \n delimited value having in between space then it was return sum of that two values
+		// equals Two Values having in between space contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("1  \n  2"), 3);
+	}
+	
+	public void stringContainsTwoValueNewLineDelimitedWithSpaceInBetweenAndLeadTrailSpace() {
+		// If String contains two \n delimited value having leading, trailing and in between space then it was return sum of that two values
+		// equals Two Values having leading, trailing and in between space contains String with that Integer Sum of those Two Values
+		assertEquals(calculator.Add("   1  \n  2   "), 3);
+	}
+	
 }
