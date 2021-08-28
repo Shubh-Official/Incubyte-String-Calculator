@@ -29,12 +29,12 @@ public class Calculator {
 						String currentDynamicDelimiterChar = dynamicDelimiter.substring(charIndex, charIndex+1);
 						for(String charEscapeRegEx: escapeRegEx) {
 							if(charEscapeRegEx.equals(currentDynamicDelimiterChar)) {
-                            	inEscapeRegEx = true;
-                            	break;
-                            }
-                        }
+                            					inEscapeRegEx = true;
+                            					break;
+                            				}
+                        			}
 						if(inEscapeRegEx)
-                            regEx += "\\";
+                            				regEx += "\\";
 						regEx += currentDynamicDelimiterChar;
 					}
 					regEx += " ";
